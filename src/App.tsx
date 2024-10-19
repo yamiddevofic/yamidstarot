@@ -97,7 +97,12 @@ const App: React.FC = () => {
                 >
                   <Star className="h-8 w-8 text-yellow-400 mb-4" />
                   <h3 className="text-xl font-semibold mb-2">{specialty}</h3>
-                  <p>En Colombia, el tarot no es solo una herramienta de adivinación, sino una guía para descubrir el potencial interno de cada persona. Las sesiones buscan brindar claridad y acompañamiento en momentos de incertidumbre.</p>
+                  <p>{
+                    specialty === "Lecturas personalizadas" ? "Ofrezco lecturas de tarot completamente adaptadas a tus necesidades personales, enfocándome en las preguntas o inquietudes que más te importan." :
+                    specialty === "Tarot para desarrollo personal" ? "Estas sesiones están diseñadas para ayudarte a encontrar un crecimiento interno y comprender mejor tus potenciales y bloqueos personales." :
+                    specialty === "Sesiones online" ? "Accede a una lectura de tarot desde la comodidad de tu hogar, a través de una videollamada que te permitirá conectarte y explorar tu camino sin importar donde estés." :
+                    "En Colombia, el tarot no es solo una herramienta de adivinación, sino una guía para descubrir el potencial interno de cada persona. Las sesiones buscan brindar claridad y acompañamiento en momentos de incertidumbre."
+                  }</p>
                 </motion.div>
               ))}
             </div>
