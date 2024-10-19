@@ -97,7 +97,7 @@ const App: React.FC = () => {
                 >
                   <Star className="h-8 w-8 text-yellow-400 mb-4" />
                   <h3 className="text-xl font-semibold mb-2">{specialty}</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <p>En Colombia, el tarot no es solo una herramienta de adivinación, sino una guía para descubrir el potencial interno de cada persona. Las sesiones buscan brindar claridad y acompañamiento en momentos de incertidumbre.</p>
                 </motion.div>
               ))}
             </div>
