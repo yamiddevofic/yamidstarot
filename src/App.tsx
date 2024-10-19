@@ -59,22 +59,22 @@ const App: React.FC = () => {
           </nav>
         </header>
 
-        <main className="container mx-auto px-6 py-12">
+        <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <motion.section 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col justify-center"
+            className="min-h-screen flex flex-col justify-center items-center text-center sm:text-left sm:items-start"
           >
-            <h2 className="text-5xl font-bold mb-6">Descubre tu camino</h2>
-            <p className="text-xl mb-8 max-w-2xl">{tarotistInfo.description}</p>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-center sm:text-left">Descubre tu camino</h2>
+            <p className="text-lg sm:text-xl mb-8 max-w-2xl text-center sm:text-left">{tarotistInfo.description}</p>
             <motion.a 
               href="https://wa.me/573124673850?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20una%20lectura%20de%20tarot." 
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-max"
+              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-full sm:w-max"
             >
               Reserva tu lectura
             </motion.a>
@@ -88,7 +88,7 @@ const App: React.FC = () => {
             className="min-h-screen flex flex-col justify-center"
           >
             <h2 className="text-4xl font-bold mb-8">Mis servicios</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
               {tarotistInfo.specialties.map((specialty, index) => (
                 <motion.div 
                   key={index}
@@ -111,7 +111,7 @@ const App: React.FC = () => {
             className="min-h-screen flex flex-col justify-center"
           >
             <h2 className="text-4xl font-bold mb-8">Contáctame</h2>
-            <form onSubmit={handleSubmit} className="max-w-md">
+            <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto sm:mx-0">
               <input 
                 type="text" 
                 placeholder="Nombre" 
@@ -136,7 +136,7 @@ const App: React.FC = () => {
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded w-full sm:w-auto"
                 type="submit"
               >
                 Enviar
