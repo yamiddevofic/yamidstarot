@@ -8,22 +8,22 @@ const tarotistInfo = {
   specialties: ["Lecturas personalizadas", "Tarot para desarrollo personal", "Sesiones online"],
 };
 
-const saveContactToLocalStorage = (contact) => {
-  let contacts = [];
-  const storedContacts = localStorage.getItem('contacts');
-
-  if (storedContacts) {
-    contacts = JSON.parse(storedContacts);
-  }
-  contacts.push(contact);
-  localStorage.setItem('contacts', JSON.stringify(contacts));
+const saveContactToFile = (contact: any) => {
+  const contacts = [contact];
+  const blob = new Blob([JSON.stringify(contacts, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'contact.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 };
 
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0]);
-
+  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -31,7 +31,7 @@ const App: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const contact = { name, email, message };
-    saveContactToLocalStorage(contact);
+    saveContactToFile(contact);
     setName("");
     setEmail("");
     setMessage("");
