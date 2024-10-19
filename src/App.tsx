@@ -50,9 +50,9 @@ const App: React.FC = () => {
       <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
 
       <div className="relative z-20">
-        <header className="p-6 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">{tarotistInfo.name}</h1>
-          <nav className="flex space-x-4">
+        <header className="p-4 sm:p-6 flex justify-between items-center flex-wrap">
+          <h1 className="text-xl sm:text-2xl font-bold w-full sm:w-auto mb-4 sm:mb-0 text-center sm:text-left">{tarotistInfo.name}</h1>
+          <nav className="flex space-x-4 w-full sm:w-auto justify-center sm:justify-end">
             <a href="#about" className="hover:text-purple-300">Sobre mí</a>
             <a href="#services" className="hover:text-purple-300">Servicios</a>
             <a href="#contact" className="hover:text-purple-300">Contacto</a>
