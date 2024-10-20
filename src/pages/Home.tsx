@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Star, Coffee, Instagram, Twitter } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const tarotistInfo = {
   name: "Yamid Tarot",
   description: "Soy un tarotista joven con un enfoque moderno e intuitivo. Mi misión es ayudarte a descubrir tu camino y potencial interno a través de las cartas del tarot.",
   specialties: ["Lecturas personalizadas", "Tarot para desarrollo personal", "Sesiones online"],
-};
-
-const saveContactToFile = (contact: any) => {
-  const contacts = [contact];
-  const blob = new Blob([JSON.stringify(contacts, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'contact.json';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
 };
 
 const Home: React.FC = () => {
@@ -30,16 +19,28 @@ const Home: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const contact = { name, email, message };
-    saveContactToFile(contact);
+        alert("Gracias por contactarme. Tu información ha sido guardada.");
     setName("");
     setEmail("");
     setMessage("");
-    alert("Gracias por contactarme. Tu información ha sido guardada.");
   };
 
   return (
     <div className="relative min-h-screen overflow-hidden text-white">
+      {/* Helmet para los metadatos de la página */}
+      <Helmet>
+        <title>Yamid Tarot - Lecturas Online</title>
+        <meta name="description" content="Explora el fascinante mundo del tarot con Yamid Tarot. Lecturas personalizadas para ayudarte a descubrir tu camino." />
+        <meta property="og:title" content="Yamid Tarot - Lecturas Online" />
+        <meta property="og:description" content="Explora el fascinante mundo del tarot con Yamid Tarot. Lecturas personalizadas para ayudarte a descubrir tu camino." />
+        <meta property="og:image" content="https://yamidtarot.online/tarot.jpg" />
+        <meta property="og:url" content="https://yamidtarot.online" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Yamid Tarot - Lecturas Online" />
+        <meta name="twitter:description" content="Explora el fascinante mundo del tarot con Yamid Tarot. Lecturas personalizadas para ayudarte a descubrir tu camino." />
+        <meta name="twitter:image" content="https://yamidtarot.online/tarot.jpg" />
+      </Helmet>
       <motion.div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
