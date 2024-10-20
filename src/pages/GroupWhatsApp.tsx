@@ -54,9 +54,11 @@ const GroupWhatsapp: React.FC = () => {
       >
         <button
           onClick={toggleDarkMode}
-          className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800 shadow-md transition-all duration-300 hover:bg-gray-300 dark:hover:bg-gray-700"
+          className={`absolute top-4 right-4 p-2 rounded-full shadow-md transition-all duration-300 hover:bg-opacity-80 ${
+            isDarkMode ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-500' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
+          }`}
         >
-          {isDarkMode ? <Sun size={24} className="text-orange-400" /> : <Moon size={24} className="text-gray-900" />}
+          {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
         </button>
 
         <div
@@ -74,7 +76,7 @@ const GroupWhatsapp: React.FC = () => {
           </div>
 
           <p className="text-lg mb-8 leading-relaxed">
-            ¡Únete a nuestra comunidad donde exploramos el tarot, disfrutamos del café y la buena música! Comparte ideas y participa en conversaciones enriquecedoras.
+            ¡Sé parte de nuestra comunidad, donde el tarot, el café y la buena música se encuentran! Aprende, conoce, y diviertete.
           </p>
 
           <div className="flex flex-col items-center space-y-4 mb-8">
