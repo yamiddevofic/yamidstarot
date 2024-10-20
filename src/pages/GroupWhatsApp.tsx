@@ -85,7 +85,7 @@ const GroupWhatsapp: React.FC = () => {
               className="w-full bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-green-700 active:scale-95"
             >
               <Sparkles className="mr-2" size={20} />
-              Unirse al grupo
+              Unirse a la comunidad
             </button>
 
             <button
