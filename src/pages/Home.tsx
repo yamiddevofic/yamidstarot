@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Star, Coffee, Instagram, Twitter } from 'lucide-react';
+import { FaWhatsapp, FaStar } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 const tarotistInfo = {
   name: "Yamid Tarot",
@@ -19,7 +21,7 @@ const Home: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-        alert("Gracias por contactarme. Tu información ha sido guardada.");
+    alert("Gracias por contactarme. Tu información ha sido guardada.");
     setName("");
     setEmail("");
     setMessage("");
@@ -61,26 +63,54 @@ const Home: React.FC = () => {
         </header>
 
         <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <motion.section 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col justify-center items-center text-center sm:text-left sm:items-start"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-center sm:text-left">Descubre tu camino</h2>
-            <p className="text-lg sm:text-xl mb-8 max-w-2xl text-center sm:text-left">{tarotistInfo.description}</p>
-            <motion.a 
-              href="https://wa.me/573124673850?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20una%20lectura%20de%20tarot." 
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-full sm:w-max"
+            {/*Aquí Comienza*/}
+            
+            <motion.section 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="min-h-screen flex flex-col justify-center items-center text-center sm:text-left sm:items-start"
             >
-              Reserva tu lectura
-            </motion.a>
-          </motion.section>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-center sm:text-left">
+                Descubre tu camino
+              </h2>
+              
+              <p className="text-lg sm:text-xl mb-8 max-w-2xl text-center sm:text-left">
+                {tarotistInfo.description}
+              </p>
+              
+              <div className="flex items-center gap-4 w-full flex-col sm:flex-row">
+                {/* Primer Botón: Reserva tu Lectura */}
+                <motion.a 
+                  href="https://wa.me/573124673850?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20una%20lectura%20de%20tarot." 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-full w-full sm:w-auto text-center flex items-center justify-center"
+                  style={{ minWidth: '250px' }}
+                >
+                  <FaStar className='text-3xl mr-4'/> Reserva tu lectura
+                </motion.a>
+                
+                {/* Segundo Botón: Únete a la Comunidad */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto"
+                  style={{ minWidth: '250px' }}
+                >
+                  <Link
+                    to="/grupo-whatsapp"
+                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full block text-center flex items-center justify-center"
+                  >
+                    <FaWhatsapp className='text-3xl mr-2'/> Únete a nuestra comunidad
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.section>
 
+          {/*Aquí Termina */}  
           <motion.section 
             id="services"
             initial={{ opacity: 0 }}
