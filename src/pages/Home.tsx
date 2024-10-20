@@ -35,13 +35,13 @@ const Home: React.FC = () => {
         <meta name="description" content="Explora el fascinante mundo del tarot con Yamid Tarot. Lecturas personalizadas para ayudarte a descubrir tu camino." />
         <meta property="og:title" content="Yamid Tarot - Lecturas Online" />
         <meta property="og:description" content="Explora el fascinante mundo del tarot con Yamid Tarot. Lecturas personalizadas para ayudarte a descubrir tu camino." />
-        <meta property="og:image" content="https://yamidtarot.online/community.jpg" />
+        <meta property="og:image" content="https://yamidtarot.online/community-2.jpg" />
         <meta property="og:url" content="https://yamidtarot.online" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Yamid Tarot - Lecturas Online" />
         <meta name="twitter:description" content="Explora el fascinante mundo del tarot con Yamid Tarot. Lecturas personalizadas para ayudarte a descubrir tu camino." />
-        <meta name="twitter:image" content="https://yamidtarot.online/community.jpg" />
+        <meta name="twitter:image" content="https://yamidtarot.online/community-2.jpg" />
       </Helmet>
       <motion.div 
         className="absolute inset-0 bg-cover bg-center z-0"
