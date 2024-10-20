@@ -47,71 +47,65 @@ const GroupWhatsapp: React.FC = () => {
       </Helmet>
 
       {/* Contenido de la página */}
+      <div
+        className={`min-h-screen flex flex-col justify-center items-center p-4 text-center transition-all duration-300 ${
+          isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-purple-100 via-amber-100 to-green-100 text-gray-800'
+        }`}
+      >
+        <button
+          onClick={toggleDarkMode}
+          className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800 shadow-md transition-all duration-300 hover:bg-gray-300 dark:hover:bg-gray-700"
+        >
+          {isDarkMode ? <Sun size={24} className="text-orange-400" /> : <Moon size={24} className="text-gray-900" />}
+        </button>
+
         <div
-          className={`min-h-screen flex flex-col justify-center items-center p-6 md:p-12 text-center transition-all duration-300 ${
-            isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-purple-100 via-amber-100 to-green-100 text-gray-800'
+          className={`w-full max-w-md rounded-3xl shadow-xl p-6 transition-all duration-300 ${
+            isDarkMode ? 'bg-gray-800' : 'bg-white bg-opacity-95'
           }`}
         >
-          <div
-          className={`min-h-screen flex flex-col justify-center items-center p-6 md:p-12 text-center transition-all duration-300 ${
-            isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-purple-100 via-amber-100 to-green-100 text-gray-800'
-          }`}
-        >
-          <button
-            onClick={toggleDarkMode}
-            className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-white-800 shadow-md transition-all duration-300 hover:bg-gray-300 dark:hover:bg-gray-700"
-          >
-            {isDarkMode ? <Sun size={24} className="text-orange-400" /> : <Moon size={24} className="text-gray-900" />}
-          </button>
+          <img src={iconoComunidad} alt="Icono de Comunidad" className="w-24 h-24 mx-auto mb-6" />
+          <h1 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-yellow-400' : 'text-purple-700'}`}>{GROUP_NAME}</h1>
 
-          <div
-            className={`max-w-3xl w-full rounded-3xl shadow-xl p-8 md:p-16 transition-all duration-300 ${
-              isDarkMode ? 'bg-gray-800' : 'bg-white bg-opacity-95'
-            }`}
-          >
-            <img src={iconoComunidad} alt="Icono de Comunidad" className="w-40 h-40 mx-auto mb-8" />
-            <h1 className={`text-4xl font-bold mb-8 ${isDarkMode ? 'text-yellow-400' : 'text-purple-700'}`}>{GROUP_NAME}</h1>
-
-            <div className="flex justify-center space-x-12 mb-10">
-              <Sparkles className={`w-20 h-20 ${isDarkMode ? 'text-yellow-400' : 'text-purple-700'}`} />
-              <Coffee className={`w-20 h-20 ${isDarkMode ? 'text-amber-500' : 'text-amber-700'}`} />
-              <Music className={`w-20 h-20 ${isDarkMode ? 'text-green-400' : 'text-green-700'}`} />
-            </div>
-
-            <p className="text-xl mb-12 leading-relaxed">
-              ¡Únete a nuestra comunidad donde exploramos el tarot, disfrutamos del café y la buena música! Comparte ideas y participa en conversaciones enriquecedoras.
-            </p>
-
-            <div className="flex flex-col items-center md:flex-row md:justify-center space-y-4 md:space-y-0 md:space-x-6 mb-10">
-              <button
-                onClick={handleJoin}
-                className="w-full md:w-auto bg-green-600 text-white font-bold py-4 px-8 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-green-700 active:scale-95"
-              >
-                <Sparkles className="mr-2" size={24} />
-                Unirse al grupo
-              </button>
-
-              <button
-                onClick={handleCopy}
-                className="w-full md:w-auto bg-blue-600 text-white font-bold py-4 px-8 rounded-full shadow-md transition-all duration-300 hover:bg-blue-700 active:scale-95 flex items-center justify-center"
-              >
-                {isCopied ? <Check size={24} /> : <Copy size={24} />}
-                <span className="ml-2">{isCopied ? 'Enlace copiado' : 'Copiar enlace'}</span>
-              </button>
-
-              <button
-                onClick={handleShare}
-                className="w-full md:w-auto bg-purple-600 text-white font-bold py-4 px-8 rounded-full shadow-md transition-all duration-300 hover:bg-purple-700 active:scale-95 flex items-center justify-center"
-              >
-                <Share2 size={24} />
-                <span className="ml-2">Compartir</span>
-              </button>
-            </div>
-
-            <p className="text-sm">
-              ¡Únete y disfruta! Puedes salir en cualquier momento. Respetamos tu privacidad.
-            </p>
+          <div className="flex justify-center space-x-6 mb-8">
+            <Sparkles className={`w-12 h-12 ${isDarkMode ? 'text-yellow-400' : 'text-purple-700'}`} />
+            <Coffee className={`w-12 h-12 ${isDarkMode ? 'text-amber-500' : 'text-amber-700'}`} />
+            <Music className={`w-12 h-12 ${isDarkMode ? 'text-green-400' : 'text-green-700'}`} />
           </div>
+
+          <p className="text-lg mb-8 leading-relaxed">
+            ¡Únete a nuestra comunidad donde exploramos el tarot, disfrutamos del café y la buena música! Comparte ideas y participa en conversaciones enriquecedoras.
+          </p>
+
+          <div className="flex flex-col items-center space-y-4 mb-8">
+            <button
+              onClick={handleJoin}
+              className="w-full bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-green-700 active:scale-95"
+            >
+              <Sparkles className="mr-2" size={20} />
+              Unirse al grupo
+            </button>
+
+            <button
+              onClick={handleCopy}
+              className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition-all duration-300 hover:bg-blue-700 active:scale-95 flex items-center justify-center"
+            >
+              {isCopied ? <Check size={20} /> : <Copy size={20} />}
+              <span className="ml-2">{isCopied ? 'Enlace copiado' : 'Copiar enlace'}</span>
+            </button>
+
+            <button
+              onClick={handleShare}
+              className="w-full bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition-all duration-300 hover:bg-purple-700 active:scale-95 flex items-center justify-center"
+            >
+              <Share2 size={20} />
+              <span className="ml-2">Compartir</span>
+            </button>
+          </div>
+
+          <p className="text-sm">
+            ¡Únete y disfruta! Puedes salir en cualquier momento. Respetamos tu privacidad.
+          </p>
         </div>
       </div>
     </>
