@@ -37,13 +37,13 @@ const GroupWhatsapp: React.FC = () => {
         <meta name="description" content="Descubre el fascinante mundo del tarot, disfruta de café de calidad y sumérgete en la música en nuestra comunidad única." />
         <meta property="og:title" content="Grupo de WhatsApp - TAROT, CAFÉ Y MÚSICA" />
         <meta property="og:description" content="Descubre el fascinante mundo del tarot, disfruta de café de calidad y sumérgete en la música en nuestra comunidad única." />
-        <meta property="og:image" content="https://yamidtarot.online/tarot.jpg" />
+        <meta property="og:image" content="https://yamidtarot.online/community.jpg" />
         <meta property="og:url" content="https://yamidtarot.online/grupo-whatsapp" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Grupo de WhatsApp - TAROT, CAFÉ Y MÚSICA" />
         <meta name="twitter:description" content="Descubre el fascinante mundo del tarot, disfruta de café de calidad y sumérgete en la música en nuestra comunidad única." />
-        <meta name="twitter:image" content="https://yamidtarot.online/tarot.jpg" />
+        <meta name="twitter:image" content="https://yamidtarot.online/community.jpg" />
       </Helmet>
 
       {/* Contenido de la página */}
