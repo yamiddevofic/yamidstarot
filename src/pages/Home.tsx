@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Star, Coffee, Instagram, Twitter } from 'lucide-react';
 import { FaWhatsapp, FaStar } from 'react-icons/fa';
