@@ -15,18 +15,6 @@ const Home: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert("Gracias por contactarme. Tu información ha sido guardada.");
-    setName("");
-    setEmail("");
-    setMessage("");
-  };
-
   return (
     <div className="relative min-h-screen overflow-hidden text-white">
       {/* Helmet para los metadatos de la página */}
@@ -139,46 +127,7 @@ const Home: React.FC = () => {
             </div>
           </motion.section>
 
-          <motion.section 
-            id="contact"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col justify-center"
-          >
-            <h2 className="text-4xl font-bold mb-8">Contáctame</h2>
-            <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto sm:mx-0">
-              <input 
-                type="text" 
-                placeholder="Nombre" 
-                className="w-full mb-4 p-2 rounded bg-white bg-opacity-20" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input 
-                type="email" 
-                placeholder="Email" 
-                className="w-full mb-4 p-2 rounded bg-white bg-opacity-20" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <textarea 
-                placeholder="Mensaje" 
-                rows={4} 
-                className="w-full mb-4 p-2 rounded bg-white bg-opacity-20" 
-                value={message} 
-                onChange={(e) => setMessage(e.target.value)}
-              ></textarea>
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded w-full sm:w-auto"
-                type="submit"
-              >
-                Enviar
-              </motion.button>
-            </form>
-          </motion.section>
+          
         </main>
 
         <footer className="bg-black bg-opacity-50 py-6">
