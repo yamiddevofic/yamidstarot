@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import  { FC, useEffect, useState } from 'react';
 
 interface MaintenancePageProps {
   estimatedTime?: string;
@@ -7,7 +7,6 @@ interface MaintenancePageProps {
 }
 
 const MaintenancePage: FC<MaintenancePageProps> = ({
-  estimatedTime = "~2 horas",
   title = "Sitio en Mantenimiento",
   description = "Estamos realizando mejoras en nuestro sitio para brindarte una mejor experiencia. Volveremos pronto con novedades emocionantes."
 }) => {
