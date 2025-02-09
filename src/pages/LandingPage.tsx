@@ -68,8 +68,9 @@ const LandingPage: React.FC = () => (
         <div className="relative group">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition" />
           <img 
-            src="./yamidtarot-2.jpg"
+            src="./yamidtarot.jpg"
             alt="Yamid Tarot"
+            style={{ backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}
             className="rounded-3xl transform rotate-3 group-hover:rotate-0 transition"
           />
         </div>
