@@ -372,56 +372,114 @@ const LandingPage: React.FC = () => {
               className="rounded-3xl transform rotate-3 group-hover:rotate-0 transition"
             />
           </div>
-          <div>
-            <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <div >
+            <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mx-[2%]">
               Mi enfoque espiritual
             </h2>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-300 text-lg leading-relaxed mx-[2%]">
               Combinando la sabiduría ancestral del tarot con técnicas modernas de coaching,
               ofrezco una experiencia única de autodescubrimiento y crecimiento personal.
             </p>
             <motion.button
-              className=" my-[5%] sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-50"
+              className="p-5 mx-[2%] my-[10%] sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-50 flex items-center justify-center space-x-2"
               whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
-              whileTap={{ scale: 0.5 }}
+              whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: .5, delay: .5 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
-              Conoce más sobre mí aquí
+              <span>Conoce más sobre mí aquí</span>
+              <motion.div
+                animate={{ x: [0, 5, 0] }} // Animación de la flecha (se mueve a la derecha y vuelve)
+                transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }} // Repite la animación infinitamente
+              >
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </motion.div>
             </motion.button>
           </div>
         </div>
       </section>
 
       {/* Servicios con cards interactivas */}
-      <section id="servicios" className="py-24 bg-gray-800">
+      <section id="servicios" className="py-16 md:py-24 bg-gray-800">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          {/* Título */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             Experiencias Transformadoras
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {/* Grid de servicios */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
-              { title: 'Lectura Premium', desc: 'Sesión personalizada de 90 minutos', price: 'COP $25.000' },
-              { title: 'Tarot Terapéutico', desc: 'Integración con psicología moderna', price: 'COP $15.000' },
-              { title: 'Lectura Express',desc:'3 preguntas concretas', price: 'COP $10.000' },
+              { 
+                title: 'Lectura Premium', 
+                desc: 'Sesión personalizada de 90 minutos', 
+                price: 'COP $25.000',
+                icon: (
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                )
+              },
+              { 
+                title: 'Tarot Estándar', 
+                desc: 'Sesión personalizada de 60 minutos', 
+                price: 'COP $15.000',
+                icon: (
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                )
+              },
+              { 
+                title: 'Lectura Express', 
+                desc: 'Sesión de 3 preguntas concretas', 
+                price: 'COP $12.000',
+                icon: (
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )
+              },
             ].map((service, index) => (
               <motion.div
                 key={index}
-                className="bg-gray-900/50 p-8 rounded-3xl border border-white/10 hover:border-purple-500/30 transition-all relative group"
+                className="bg-gray-900/50 p-6 md:p-8 rounded-3xl border border-white/10 hover:border-purple-500/30 transition-all relative group overflow-hidden"
                 whileHover="hover"
-                variants={cardVariants}
+                variants={{
+                  hover: { y: -10, transition: { duration: 0.3 } }
+                }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition" />
-                <div className="relative">
-                  <div className="w-12 h-12 mb-6 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+                {/* Fondo con gradiente al hacer hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                {/* Contenido de la card */}
+                <div className="relative space-y-4">
+                  {/* Icono */}
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                    {service.icon}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">{service.title}</h3>
-                  <p className="text-gray-400 mb-6">{service.desc}</p>
-                  <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+
+                  {/* Título */}
+                  <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+
+                  {/* Descripción */}
+                  <p className="text-gray-400">{service.desc}</p>
+
+                  {/* Precio */}
+                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     {service.price}
                   </div>
                 </div>
@@ -432,24 +490,24 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Contacto con glassmorphism */}
-      <section id="contacto" className="relative py-24 bg-gray-900">
+      <section id="contacto" className="relative py-16 md:py-24 bg-gray-900 overflow-hidden">
         {/* Fondo con textura sutil */}
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/dotnoise-light-grey.png')]" />
 
         {/* Contenedor principal */}
         <div className="container mx-auto px-4 max-w-2xl">
-          <div className="bg-gray-800/30 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-xl">
+          <div className="bg-gray-800/30 backdrop-blur-lg border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl">
             {/* Título */}
-            <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Inicia tu viaje
             </h2>
 
             {/* Mensaje de "En construcción" */}
-            <div className="text-center pb-12">
-              <div className="inline-flex items-center justify-center bg-gray-900/50 border border-white/10 rounded-2xl p-6">
+            <div className="text-center pb-8 md:pb-12">
+              <div className="inline-flex flex-col md:flex-row items-center justify-center bg-gray-900/50 border border-white/10 rounded-2xl p-4 md:p-6 space-y-4 md:space-y-0 md:space-x-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-12 w-12 text-purple-400 animate-pulse"
+                  className="h-10 w-10 md:h-12 md:w-12 text-purple-400 animate-pulse"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -461,8 +519,11 @@ const LandingPage: React.FC = () => {
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <p className="ml-4 text-xl text-purple-200 font-semibold">
-                  Esta sección está en construcción. ¡Próximamente! <a href="#inicio" className="underline">Contáctame</a>
+                <p className="text-lg md:text-xl text-purple-200 font-semibold text-center p-[5%]">
+                  Esta sección está en construcción. ¡Próximamente!{" "}
+                  <a href="#inicio" className="underline hover:text-purple-400 transition-colors">
+                    Contáctame
+                  </a>
                 </p>
               </div>
             </div>
@@ -473,24 +534,24 @@ const LandingPage: React.FC = () => {
                 <input
                   type="text"
                   placeholder="Nombre completo"
-                  className="w-full px-6 py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-4 py-3 md:px-6 md:py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
                   disabled
                 />
                 <input
                   type="email"
                   placeholder="Correo electrónico"
-                  className="w-full px-6 py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-4 py-3 md:px-6 md:py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
                   disabled
                 />
                 <textarea
                   rows={5}
                   placeholder="Tu mensaje..."
-                  className="w-full px-6 py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-4 py-3 md:px-6 md:py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
                   disabled
                 />
               </div>
               <motion.button
-                className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-2xl transition-all hover:shadow-lg hover:shadow-purple-500/20"
+                className="w-full px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-2xl transition-all hover:shadow-lg hover:shadow-purple-500/20"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 disabled
