@@ -268,23 +268,35 @@ const LandingPage: React.FC = () => {
         </AnimatePresence>
       </header>
 
-      {/* Sección Hero con parallax effect */}
+      {/* Sección Hero con video de fondo */}
       <section
         id="inicio"
-        className="relative h-screen flex items-center justify-center bg-fixed bg-cover bg-center overflow-hidden"
-        style={{ backgroundImage: 'url(https://cdn.pixabay.com/photo/2020/05/10/22/41/galaxy-5155754_1280.jpg)' }}
+        className="relative h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Overlay con gradiente sutil y animado */}
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-purple-900/50 to-transparent animate-gradient-shift" />
+        {/* Video de fondo */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="hero-2.mp4" type="video/mp4" />
+            Tu navegador no soporta videos HTML5.
+          </video>
+          {/* Overlay oscuro para mejorar la legibilidad del texto */}
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-purple-900/50 to-transparent animate-gradient-shift" />
+        </div>
 
         {/* Contenido principal */}
         <motion.div
-          className="relative z-10 text-center px-4"
+          className="relative z-10 text-center px-4 w-full max-w-4xl mx-auto"
           {...heroAnimation}
         >
           {/* Título principal con animación de texto y gradiente dinámico */}
           <motion.h1
-            className="text-6xl md:text-8xl font-extrabold my-6 bg-gradient-to-r from-purple-200 via-pink-200 to-indigo-200 bg-clip-text text-transparent animate-text-glow"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold my-6 bg-gradient-to-r from-purple-200 via-pink-200 to-indigo-200 bg-clip-text text-transparent animate-text-glow"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -294,7 +306,7 @@ const LandingPage: React.FC = () => {
 
           {/* Subtítulo con copywriting persuasivo y animación */}
           <motion.p
-            className="text-xl md:text-2xl text-purple-100 mb-8 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-purple-100 mb-8 mx-auto font-light leading-relaxed max-w-2xl px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1 }}
@@ -303,18 +315,18 @@ const LandingPage: React.FC = () => {
           </motion.p>
 
           {/* Botón con animación y microinteracciones */}
-          <motion.button
-            className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-300"
-            whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.5 }}
-          >
-            <span className="flex items-center justify-center gap-2">
+          <a href="https://wa.me/+573124673850?text=Hola%2C%20estoy%20interesado%20en%20reservar%20una%20lectura%20de%20tarot%20contigo." target='_blanck'>
+            <motion.button
+              className="px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-50 flex items-center justify-center gap-2 mx-auto"
+              whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
+              whileTap={{ scale: 0.5 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: .5, delay: .5 }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 animate-bounce"
+                className="h-5 w-5 sm:h-6 sm:w-6 animate-bounce"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -326,9 +338,9 @@ const LandingPage: React.FC = () => {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Reserva tu lectura ahora
-            </span>
-          </motion.button>
+              Reserva tu lectura aquí
+            </motion.button>
+          </a>
         </motion.div>
 
         {/* Efecto de partículas sutiles para dar profundidad */}
@@ -348,7 +360,6 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* Sobre Mí con diseño split-screen */}
       <section id="sobre-mí" className="py-24 bg-gray-900">
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
@@ -369,6 +380,16 @@ const LandingPage: React.FC = () => {
               Combinando la sabiduría ancestral del tarot con técnicas modernas de coaching,
               ofrezco una experiencia única de autodescubrimiento y crecimiento personal.
             </p>
+            <motion.button
+              className=" my-[5%] sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-50"
+              whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
+              whileTap={{ scale: 0.5 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: .5, delay: .5 }}
+            >
+              Conoce más sobre mí aquí
+            </motion.button>
           </div>
         </div>
       </section>
@@ -412,34 +433,67 @@ const LandingPage: React.FC = () => {
 
       {/* Contacto con glassmorphism */}
       <section id="contacto" className="relative py-24 bg-gray-900">
+        {/* Fondo con textura sutil */}
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/dotnoise-light-grey.png')]" />
+
+        {/* Contenedor principal */}
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="bg-gray-800/30 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-xl">
+            {/* Título */}
             <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Inicia tu viaje
             </h2>
-            <form className="space-y-6">
+
+            {/* Mensaje de "En construcción" */}
+            <div className="text-center pb-12">
+              <div className="inline-flex items-center justify-center bg-gray-900/50 border border-white/10 rounded-2xl p-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-12 w-12 text-purple-400 animate-pulse"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <p className="ml-4 text-xl text-purple-200 font-semibold">
+                  Esta sección está en construcción. ¡Próximamente! <a href="#inicio" className="underline">Contáctame</a>
+                </p>
+              </div>
+            </div>
+
+            {/* Formulario deshabilitado */}
+            <form className="space-y-6 opacity-50 pointer-events-none">
               <div className="space-y-4 text-white">
                 <input
                   type="text"
                   placeholder="Nombre completo"
                   className="w-full px-6 py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  disabled
                 />
                 <input
                   type="email"
                   placeholder="Correo electrónico"
                   className="w-full px-6 py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  disabled
                 />
                 <textarea
                   rows={5}
                   placeholder="Tu mensaje..."
                   className="w-full px-6 py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  disabled
                 />
               </div>
               <motion.button
                 className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-2xl transition-all hover:shadow-lg hover:shadow-purple-500/20"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                disabled
               >
                 Enviar mensaje
               </motion.button>
@@ -448,26 +502,54 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer con socials */}
-      <footer className="py-12 bg-gray-900 border-t border-white/10">
+      {/* Footer con socials moderno */}
+      <footer className="py-16 bg-gray-900 border-t border-white/10">
         <div className="container mx-auto px-4 text-center">
-          <div className="flex justify-center space-x-6 mb-8">
+          {/* Iconos de redes sociales con animaciones */}
+          <div className="flex justify-center space-x-8 mb-8">
             {['instagram', 'facebook', 'tiktok'].map((social) => (
               <motion.a
                 key={social}
                 href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-                whileHover={{ y: -2 }}
+                className="text-gray-400 hover:text-white transition-colors relative group"
+                whileHover={{ y: -5 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <span className="sr-only">{social}</span>
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  {/* Iconos de redes sociales aquí */}
-                </svg>
+                {/* Contenedor del ícono con gradiente animado */}
+                <motion.div
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 backdrop-blur-lg border border-white/10 group-hover:border-purple-500/50 transition-all"
+                  whileHover={{ scale: 1.1, rotate: 15 }}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    {/* Iconos de redes sociales */}
+                    {social === 'instagram' && (
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    )}
+                    {social === 'facebook' && (
+                      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                    )}
+                    {social === 'tiktok' && (
+                      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+                    )}
+                  </svg>
+                </motion.div>
               </motion.a>
             ))}
           </div>
-          <p className="text-gray-500">
-            © {new Date().getFullYear()} Yamid Tarot. Todos los derechos reservados.
+
+          {/* Texto de derechos de autor con gradiente */}
+          <p className="text-gray-500 text-sm">
+            © {new Date().getFullYear()}{' '}
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Yamid Tarot
+            </span>
+            . Todos los derechos reservados.
           </p>
         </div>
       </footer>
