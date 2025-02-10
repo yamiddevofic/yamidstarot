@@ -10,9 +10,9 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         {/* Ruta de mantenimiento*/}
-        <Route path="/" element={<MaintenancePage />} />
+        <Route path="/maintenance" element={<MaintenancePage />} />
         {/* Ruta para la página principal */}
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         {/* Ruta para la página del grupo de WhatsApp */}
         <Route path="/grupo-whatsapp" element={<GroupWhatsapp />} />
         

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BsWhatsapp } from 'react-icons/bs';
 
 const getIconForNavItem = (item: string) => {
   switch (item.toLowerCase()) {
@@ -99,13 +100,9 @@ const heroAnimation = {
   transition: { duration: 1 },
 };
 
-const cardVariants = {
-  hover: { y: -10, scale: 1.02 },
-  tap: { scale: 0.98 },
-};
-
 const LandingPage: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const overlayVariants = {
@@ -122,11 +119,31 @@ const LandingPage: React.FC = () => {
     }),
   };
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY && isVisible) {
+        setIsVisible(false);
+      } else if (window.scrollY < lastScrollY && !isVisible) {
+        setIsVisible(true);
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isVisible]);
+
   const navItems = ["Inicio", "Sobre Mí", "Servicios", "Contacto"];
 
   return (
     <>
-      <header className="fixed w-full top-0 z-50 bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-lg bg-opacity-90 border-b border-white/10 shadow-xl">
+      <motion.header
+        className="fixed w-full top-0 z-50 bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-lg bg-opacity-90 border-b border-white/10 shadow-xl"
+        animate={{ y: isVisible ? 0 : -100 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      >
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           {/* Logo con efecto neón y animación */}
           <motion.div
@@ -266,15 +283,15 @@ const LandingPage: React.FC = () => {
             </motion.nav>
           )}
         </AnimatePresence>
-      </header>
+      </motion.header>
 
-      {/* Sección Hero con video de fondo */}
+      {/* Sección Hero con video de fondo modernizado y sin titilado */}
       <section
         id="inicio"
         className="relative h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Video de fondo */}
-        <div className="absolute inset-0 z-0">
+        {/* Video de fondo con efecto parallax sutil */}
+        <div className="absolute inset-0 z-0 transform scale-110 hover:scale-100 transition-transform duration-1000 ease-in-out">
           <video
             autoPlay
             loop
@@ -282,21 +299,21 @@ const LandingPage: React.FC = () => {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="hero-2.mp4" type="video/mp4" />
+            <source src="tarot.mov" type="video/mp4" />
             Tu navegador no soporta videos HTML5.
           </video>
-          {/* Overlay oscuro para mejorar la legibilidad del texto */}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-purple-900/50 to-transparent animate-gradient-shift" />
+          {/* Overlay con gradiente animado y efecto glassmorphism */}
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-purple-900/50 to-transparent animate-gradient-shift backdrop-blur-sm" />
         </div>
 
-        {/* Contenido principal */}
+        {/* Contenido principal con animaciones mejoradas */}
         <motion.div
-          className="relative z-10 text-center px-4 w-full max-w-4xl mx-auto"
+          className="relative z-10 text-center px-4 w-full max-w-6xl mx-auto"
           {...heroAnimation}
         >
-          {/* Título principal con animación de texto y gradiente dinámico */}
+          {/* Título principal con gradiente dinámico y sin titilado */}
           <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold my-6 bg-gradient-to-r from-purple-200 via-pink-200 to-indigo-200 bg-clip-text text-transparent animate-text-glow"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold my-6 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -304,9 +321,9 @@ const LandingPage: React.FC = () => {
             Descubre tu destino
           </motion.h1>
 
-          {/* Subtítulo con copywriting persuasivo y animación */}
+          {/* Subtítulo con efecto de aparición suave */}
           <motion.p
-            className="text-lg sm:text-xl md:text-2xl text-purple-100 mb-8 mx-auto font-light leading-relaxed max-w-2xl px-4"
+            className="text-lg sm:text-xl md:text-2xl text-purple-100 mb-8 mx-auto font-light leading-relaxed max-w-2xl px-4 drop-shadow-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1 }}
@@ -314,36 +331,52 @@ const LandingPage: React.FC = () => {
             Transforma tu vida con una lectura de tarot personalizada. Conecta con tu yo interior y desbloquea las respuestas que el universo tiene para ti.
           </motion.p>
 
-          {/* Botón con animación y microinteracciones */}
-          <a href="https://wa.me/+573124673850?text=Hola%2C%20estoy%20interesado%20en%20reservar%20una%20lectura%20de%20tarot%20contigo." target='_blanck'>
+          {/* Botones con efecto 3D y animación al hover */}
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center'>
+            <a href="https://wa.me/+573124673850?text=Hola%2C%20estoy%20interesado%20en%20reservar%20una%20lectura%20de%20tarot%20contigo." target='_blank'>
+              <motion.button
+                className="w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-300 flex items-left md:items-center justifyt-left md:justify-center  gap-2 mx-auto transform hover:-translate-y-1 hover:rotate-1"
+                whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 sm:h-6 sm:w-6 animate-bounce"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+                Reserva tu lectura aquí
+              </motion.button>
+            </a>
+            <a href="/grupo-whatsapp" target='_blank'>
             <motion.button
-              className="px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-50 flex items-center justify-center gap-2 mx-auto"
+              className="w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-300 flex items-left md:items-center justifyt-left md:justify-center gap-2 mx-auto transform hover:-translate-y-1 hover:-rotate-1"
               whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
-              whileTap={{ scale: 0.5 }}
+              whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: .5, delay: .5 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 sm:h-6 sm:w-6 animate-bounce"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-              Reserva tu lectura aquí
+              {/* Icono de WhatsApp */}
+              <BsWhatsapp className="w-6 h-6 sm:w-8 sm:h-8 animate-bounce" />
+              Únete a mi comunidad de WhatsApp
             </motion.button>
-          </a>
+            </a>
+          </div>
         </motion.div>
 
-        {/* Efecto de partículas sutiles para dar profundidad */}
+        {/* Efecto de partículas con animación 3D */}
         <div className="absolute inset-0 z-0">
           <div className="particles">
             {[...Array(30)].map((_, i) => (
@@ -354,6 +387,7 @@ const LandingPage: React.FC = () => {
                   top: `${Math.random() * 100}%`,
                   left: `${Math.random() * 100}%`,
                   animationDelay: `${Math.random() * 2}s`,
+                  transform: `translateZ(${Math.random() * 100}px)`,
                 }}
               />
             ))}
@@ -380,6 +414,7 @@ const LandingPage: React.FC = () => {
               Combinando la sabiduría ancestral del tarot con técnicas modernas de coaching,
               ofrezco una experiencia única de autodescubrimiento y crecimiento personal.
             </p>
+            <a href="/maintenance">
             <motion.button
               className="p-5 mx-[2%] my-[10%] sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-50 flex items-center justify-center space-x-2"
               whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
@@ -408,6 +443,7 @@ const LandingPage: React.FC = () => {
                 </svg>
               </motion.div>
             </motion.button>
+            </a>
           </div>
         </div>
       </section>
