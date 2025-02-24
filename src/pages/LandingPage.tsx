@@ -1,6 +1,7 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BsWhatsapp } from 'react-icons/bs';
+
 
 const getIconForNavItem = (item: string) => {
   switch (item.toLowerCase()) {
@@ -94,13 +95,14 @@ const getIconForNavItem = (item: string) => {
   }
 };
 
+
 const heroAnimation = {
   initial: { opacity: 0, y: -50 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 1 },
 };
 
-const LandingPage: React.FC = () => {
+const LandingPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -112,7 +114,7 @@ const LandingPage: React.FC = () => {
 
   const menuItemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
+    visible: (i : number ) => ({
       opacity: 1,
       y: 0,
       transition: { delay: i * 0.1 },
@@ -123,40 +125,42 @@ const LandingPage: React.FC = () => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY && isVisible) {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && isVisible) {
         setIsVisible(false);
-      } else if (window.scrollY < lastScrollY && !isVisible) {
+      } else if (currentScrollY < lastScrollY && !isVisible) {
         setIsVisible(true);
       }
-      lastScrollY = window.scrollY;
+      lastScrollY = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isVisible]);
 
   const navItems = ["Inicio", "Sobre Mí", "Servicios", "Contacto"];
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-900">
       <motion.header
         className="fixed w-full top-0 z-50 bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-lg bg-opacity-90 border-b border-white/10 shadow-xl"
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
       >
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          {/* Logo con efecto neón y animación */}
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+          {/* Logo */}
           <motion.div
-            className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent flex items-center gap-2"
+            className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent flex items-center gap-2"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
             <motion.div
-              className="w-8 h-8"
+              className="w-6 h-6 sm:w-8 sm:h-8"
               animate={{ rotate: 360 }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             >
+              {/* Star SVG */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -165,6 +169,7 @@ const LandingPage: React.FC = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="w-full h-full"
               >
                 <defs>
                   <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -175,62 +180,63 @@ const LandingPage: React.FC = () => {
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
               </svg>
             </motion.div>
-            Yamid Tarot
+            <span className="inline">Yamid Tarot</span>
           </motion.div>
 
-          {/* Menú desktop con íconos relacionados */}
-          <nav className="hidden md:flex space-x-8 items-center">
-            {navItems.map((item: string) => (
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex space-x-6 xl:space-x-8 items-center">
+            {navItems.map((item) => (
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase().replace(" ", "-")}`}
-                className="relative text-white/90 hover:text-white transition-colors text-lg font-medium flex items-center gap-2 group"
+                className="relative text-white/90 hover:text-white transition-colors text-base xl:text-lg font-medium flex items-center gap-2 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* Ícono relacionado */}
                 <motion.div
-                  className="w-5 h-5"
+                  className="w-4 h-4 xl:w-5 xl:h-5"
                   whileHover={{ rotate: 15, scale: 1.2 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   {getIconForNavItem(item)}
                 </motion.div>
                 {item}
-                {/* Subrayado animado */}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all group-hover:w-full" />
               </motion.a>
             ))}
           </nav>
 
-          {/* Botón menú móvil con ícono animado */}
-          <div className="md:hidden flex items-center bg-gray-900 rounded-md border-[1px] border-[#333] hover:border-[#FC739C] transition-colors">
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="p-5 rounded-lg hover:bg-white/10 transition-colors focus:outline-none"
+              className="p-2 rounded-lg hover:bg-white/10 transition-colors focus:outline-none"
               aria-expanded={menuOpen}
-              title={menuOpen ? "Haz click aquí para cerrar el menú" : "Haz click aquí para abrir menú"}
             >
-              <motion.div className="w-6 h-6 relative flex justify-center items-center" animate={menuOpen ? "open" : "closed"}>
+              <motion.div 
+                className="w-6 h-6 relative flex justify-center items-center"
+                animate={menuOpen ? "open" : "closed"}
+              >
                 <motion.span
-                  className="block absolute h-0.5 w-full bg-white rounded-full"
+                  className="absolute h-0.5 w-full bg-white rounded-full"
                   variants={{
-                    closed: { y: -6, rotate: 0 },
-                    open: { y: 0, rotate: 45 },
+                    closed: { top: "35%", rotate: 0 },
+                    open: { top: "50%", rotate: 45 }
                   }}
                 />
                 <motion.span
-                  className="block absolute h-0.5 w-full bg-white rounded-full"
+                  className="absolute h-0.5 w-full bg-white rounded-full"
                   variants={{
                     closed: { opacity: 1 },
-                    open: { opacity: 0 },
+                    open: { opacity: 0 }
                   }}
+                  style={{ top: "50%" }}
                 />
                 <motion.span
-                  className="block absolute h-0.5 w-full bg-white rounded-full"
+                  className="absolute h-0.5 w-full bg-white rounded-full"
                   variants={{
-                    closed: { y: 6, rotate: 0 },
-                    open: { y: 0, rotate: -45 },
+                    closed: { top: "65%", rotate: 0 },
+                    open: { top: "50%", rotate: -45 }
                   }}
                 />
               </motion.div>
@@ -238,60 +244,43 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Overlay menú móvil con íconos relacionados */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {menuOpen && (
             <motion.nav
-              className="md:hidden inset-0 bg-gray-900/80 backdrop-blur-lg z-60 flex flex-col items-center justify-center space-y-6 py-12"
+              className="lg:hidden fixed inset-x-0 top-[73px] bg-gray-900/95 backdrop-blur-lg z-40"
               initial="hidden"
               animate="visible"
               exit="hidden"
               variants={overlayVariants}
-              transition={{ duration: 0.3 }}
             >
-              {navItems.map((item: string, index: number) => (
-                <motion.a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  className="text-2xl font-semibold text-white relative py-2 px-6 flex items-center gap-3 group"
-                  onClick={toggleMenu}
-                  custom={index}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  variants={menuItemVariants}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {/* Ícono relacionado */}
-                  <motion.div
-                    className="w-6 h-6"
-                    whileHover={{ rotate: 15, scale: 1.2 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+              <div className="container mx-auto px-4 py-6">
+                {navItems.map((item, index) => (
+                  <motion.a
+                    key={item}
+                    href={`#${item.toLowerCase().replace(" ", "-")}`}
+                    className="block py-3 text-lg font-medium text-white hover:text-purple-400 transition-colors"
+                    onClick={toggleMenu}
+                    custom={index}
+                    variants={menuItemVariants}
                   >
-                    {getIconForNavItem(item)}
-                  </motion.div>
-                  <span className="relative z-10">{item}</span>
-                  {/* Fondo gradiente animado */}
-                  <motion.span
-                    className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full scale-0 opacity-0"
-                    whileHover={{ scale: 1, opacity: 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  />
-                </motion.a>
-              ))}
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5">
+                        {getIconForNavItem(item)}
+                      </div>
+                      {item}
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
             </motion.nav>
           )}
         </AnimatePresence>
       </motion.header>
 
-      {/* Sección Hero con video de fondo modernizado y sin titilado */}
-      <section
-        id="inicio"
-        className="relative h-screen flex items-center justify-center overflow-hidden"
-      >
-        {/* Video de fondo con efecto parallax sutil */}
-        <div className="absolute inset-0 z-0 transform scale-110 hover:scale-100 transition-transform duration-1000 ease-in-out">
+      {/* Hero Section */}
+      <section id="inicio" className="relative min-h-screen flex items-center justify-center pt-20">
+        <div className="absolute inset-0 z-0">
           <video
             autoPlay
             loop
@@ -300,222 +289,194 @@ const LandingPage: React.FC = () => {
             className="w-full h-full object-cover"
           >
             <source src="tarot.mov" type="video/mp4" />
-            Tu navegador no soporta videos HTML5.
           </video>
-          {/* Overlay con gradiente animado y efecto glassmorphism */}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-purple-900/50 to-transparent animate-gradient-shift backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/50 to-gray-900/90" />
         </div>
 
-        {/* Contenido principal con animaciones mejoradas */}
-        <motion.div
-          className="relative z-10 text-center px-4 w-full max-w-6xl mx-auto"
-          {...heroAnimation}
-        >
-          {/* Título principal con gradiente dinámico y sin titilado */}
-          <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold my-6 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
+        <div className="relative z-10 container mx-auto px-4 py-12 sm:py-16">
+          <motion.div
+            className="text-center max-w-4xl mx-auto"
+            {...heroAnimation}
           >
-            Descubre tu destino
-          </motion.h1>
-
-          {/* Subtítulo con efecto de aparición suave */}
-          <motion.p
-            className="text-lg sm:text-xl md:text-2xl text-purple-100 mb-8 mx-auto font-light leading-relaxed max-w-2xl px-4 drop-shadow-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            Transforma tu vida con una lectura de tarot personalizada. Conecta con tu yo interior y desbloquea las respuestas que el universo tiene para ti.
-          </motion.p>
-
-          {/* Botones con efecto 3D y animación al hover */}
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center'>
-            <a href="https://wa.me/+573124673850?text=Hola%2C%20estoy%20interesado%20en%20reservar%20una%20lectura%20de%20tarot%20contigo." target='_blank'>
-              <motion.button
-                className="w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-300 flex items-left md:items-center justifyt-left md:justify-center  gap-2 mx-auto transform hover:-translate-y-1 hover:rotate-1"
-                whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 sm:h-6 sm:w-6 animate-bounce"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  />
-                </svg>
-                Reserva tu lectura aquí
-              </motion.button>
-            </a>
-            <a href="/grupo-whatsapp" target='_blank'>
-            <motion.button
-              className="w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-300 flex items-left md:items-center justifyt-left md:justify-center gap-2 mx-auto transform hover:-translate-y-1 hover:-rotate-1"
-              whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 50 }}
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 1, delay: 0.5 }}
             >
-              {/* Icono de WhatsApp */}
-              <BsWhatsapp className="w-6 h-6 sm:w-8 sm:h-8 animate-bounce" />
-              Únete a mi comunidad de WhatsApp
-            </motion.button>
-            </a>
-          </div>
-        </motion.div>
+              Descubre tu destino
+            </motion.h1>
 
-        {/* Efecto de partículas con animación 3D */}
-        <div className="absolute inset-0 z-0">
-          <div className="particles">
-            {[...Array(30)].map((_, i) => (
-              <div
-                key={i}
-                className="particle"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                  transform: `translateZ(${Math.random() * 100}px)`,
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* Sobre Mí con diseño split-screen */}
-      <section id="sobre-mí" className="py-24 bg-gray-900">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition" />
-            <img
-              src="./yamidtarot-3.png"
-              alt="Yamid Tarot"
-              style={{ backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}
-              className="rounded-3xl transform rotate-3 group-hover:rotate-0 transition"
-            />
-          </div>
-          <div >
-            <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mx-[2%]">
-              Mi enfoque espiritual
-            </h2>
-            <p className="text-gray-300 text-lg leading-relaxed mx-[2%]">
-              Combinando la sabiduría ancestral del tarot con técnicas modernas de coaching,
-              ofrezco una experiencia única de autodescubrimiento y crecimiento personal.
-            </p>
-            <a href="/maintenance">
-            <motion.button
-              className="p-5 mx-[2%] my-[10%] sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-50 flex items-center justify-center space-x-2"
-              whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(192, 132, 252, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 50 }}
+            <motion.p
+              className="text-base sm:text-lg md:text-xl text-purple-100 mb-8 font-light leading-relaxed max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 1, delay: 1 }}
             >
-              <span>Conoce más sobre mí aquí</span>
-              <motion.div
-                animate={{ x: [0, 5, 0] }} // Animación de la flecha (se mueve a la derecha y vuelve)
-                transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }} // Repite la animación infinitamente
+              Transforma tu vida con una lectura de tarot personalizada. Conecta con tu yo interior y desbloquea las respuestas que el universo tiene para ti.
+            </motion.p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-2xl mx-auto">
+              <a
+                href="https://wa.me/+573124673850?text=Hola%2C%20estoy%20interesado%20en%20reservar%20una%20lectura%20de%20tarot%20contigo."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
               >
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <motion.button
+                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-600/40 flex items-center justify-center gap-2 transition-all"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </motion.div>
-            </motion.button>
-            </a>
-          </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 animate-bounce"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    />
+                  </svg>
+                  Reserva tu lectura
+                </motion.button>
+              </a>
+
+              <a
+                href="/grupo-whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+              >
+                <motion.button
+                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-600/40 flex items-center justify-center gap-2 transition-all"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <BsWhatsapp className="w-5 h-5 animate-bounce" />
+                  Únete al grupo
+                </motion.button>
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Servicios con cards interactivas */}
-      <section id="servicios" className="py-16 md:py-24 bg-gray-800">
+      {/* About Section */}
+      <section id="sobre-mí" className="py-16 sm:py-24 bg-gray-900">
         <div className="container mx-auto px-4">
-          {/* Título */}
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="relative group order-2 md:order-1">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition-all duration-300" />
+              <img
+                src="./yamidtarot-3.png"
+                alt="Yamid Tarot"
+                className="relative rounded-3xl transform rotate-3 group-hover:rotate-0 transition-all duration-300 w-full"
+              />
+            </div>
+            <div className="order-1 md:order-2">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Mi enfoque espiritual
+              </h2>
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
+                Combinando la sabiduría ancestral del tarot con técnicas modernas de coaching,
+                ofrezco una experiencia única de autodescubrimiento y crecimiento personal.
+              </p>
+              <motion.button
+                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-600/40 flex items-center justify-center gap-2 transition-all"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Conoce más sobre mí</span>
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </motion.div>
+              </motion.button>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="servicios" className="py-16 sm:py-24 bg-gray-800">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             Experiencias Transformadoras
           </h2>
 
-          {/* Grid de servicios */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { 
-                title: 'Lectura Premium', 
-                desc: 'Sesión personalizada de 90 minutos', 
+              {
+                title: 'Lectura Premium',
+                desc: 'Sesión personalizada de 90 minutos con análisis profundo de tu situación.',
                 price: 'COP $25.000',
                 icon: (
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
                 )
               },
-              { 
-                title: 'Tarot Estándar', 
-                desc: 'Sesión personalizada de 60 minutos', 
+              {
+                title: 'Tarot Estándar',
+                desc: 'Sesión personalizada de 60 minutos para resolver tus dudas principales.',
                 price: 'COP $15.000',
                 icon: (
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                 )
               },
-              { 
-                title: 'Lectura Express', 
-                desc: 'Sesión de 3 preguntas concretas', 
+              {
+                title: 'Lectura Express',
+                desc: 'Sesión rápida de 3 preguntas específicas para orientación inmediata.',
                 price: 'COP $12.000',
                 icon: (
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 )
-              },
+              }
             ].map((service, index) => (
               <motion.div
                 key={index}
-                className="bg-gray-900/50 p-6 md:p-8 rounded-3xl border border-white/10 hover:border-purple-500/30 transition-all relative group overflow-hidden"
-                whileHover="hover"
-                variants={{
-                  hover: { y: -10, transition: { duration: 0.3 } }
-                }}
+                className="bg-gray-900/50 p-6 sm:p-8 rounded-3xl border border-white/10 hover:border-purple-500/30 transition-all relative group overflow-hidden"
+                whileHover={{ y: -5, transition: { duration: 0.3 } }}
               >
-                {/* Fondo con gradiente al hacer hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                {/* Contenido de la card */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
                 <div className="relative space-y-4">
-                  {/* Icono */}
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
                     {service.icon}
                   </div>
 
-                  {/* Título */}
-                  <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">
+                    {service.title}
+                  </h3>
 
-                  {/* Descripción */}
-                  <p className="text-gray-400">{service.desc}</p>
+                  <p className="text-gray-400 text-sm sm:text-base">
+                    {service.desc}
+                  </p>
 
-                  {/* Precio */}
-                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     {service.price}
                   </div>
                 </div>
@@ -525,25 +486,23 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Contacto con glassmorphism */}
-      <section id="contacto" className="relative py-16 md:py-24 bg-gray-900 overflow-hidden">
-        {/* Fondo con textura sutil */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/dotnoise-light-grey.png')]" />
+      {/* Contact Section */}
+      <section id="contacto" className="relative py-16 sm:py-24 bg-gray-900 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-purple-900/20 via-gray-900/40 to-gray-900/60" />
+        </div>
 
-        {/* Contenedor principal */}
-        <div className="container mx-auto px-4 max-w-2xl">
-          <div className="bg-gray-800/30 backdrop-blur-lg border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl">
-            {/* Título */}
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 max-w-2xl relative z-10">
+          <div className="bg-gray-800/30 backdrop-blur-lg border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Inicia tu viaje
             </h2>
 
-            {/* Mensaje de "En construcción" */}
-            <div className="text-center pb-8 md:pb-12">
-              <div className="inline-flex flex-col md:flex-row items-center justify-center bg-gray-900/50 border border-white/10 rounded-2xl p-4 md:p-6 space-y-4 md:space-y-0 md:space-x-4">
+            <div className="text-center pb-8">
+              <div className="inline-flex flex-col sm:flex-row items-center justify-center bg-gray-900/50 border border-white/10 rounded-2xl p-4 sm:p-6 space-y-4 sm:space-y-0 sm:space-x-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-10 w-10 md:h-12 md:w-12 text-purple-400 animate-pulse"
+                  className="h-8 w-8 sm:h-10 sm:w-10 text-purple-400 animate-pulse"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -555,39 +514,41 @@ const LandingPage: React.FC = () => {
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <p className="text-lg md:text-xl text-purple-200 font-semibold text-center p-[5%]">
+                <p className="text-base sm:text-lg text-purple-200 font-medium">
                   Esta sección está en construcción. ¡Próximamente!{" "}
-                  <a href="#inicio" className="underline hover:text-purple-400 transition-colors">
+                  <a 
+                    href="#inicio" 
+                    className="underline hover:text-purple-400 transition-colors"
+                  >
                     Contáctame
                   </a>
                 </p>
               </div>
             </div>
 
-            {/* Formulario deshabilitado */}
-            <form className="space-y-6 opacity-50 pointer-events-none">
-              <div className="space-y-4 text-white">
+            <form className="space-y-4 sm:space-y-6 opacity-50 pointer-events-none">
+              <div className="space-y-4">
                 <input
                   type="text"
                   placeholder="Nombre completo"
-                  className="w-full px-4 py-3 md:px-6 md:py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500 text-white"
                   disabled
                 />
                 <input
                   type="email"
                   placeholder="Correo electrónico"
-                  className="w-full px-4 py-3 md:px-6 md:py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500 text-white"
                   disabled
                 />
                 <textarea
-                  rows={5}
+                  rows={4}
                   placeholder="Tu mensaje..."
-                  className="w-full px-4 py-3 md:px-6 md:py-4 bg-gray-900/50 border border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-500 text-white resize-none"
                   disabled
                 />
               </div>
               <motion.button
-                className="w-full px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-2xl transition-all hover:shadow-lg hover:shadow-purple-500/20"
+                className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-xl transition-all"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 disabled
@@ -599,59 +560,58 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer con socials moderno */}
-      <footer className="py-16 bg-gray-900 border-t border-white/10">
-        <div className="container mx-auto px-4 text-center">
-          {/* Iconos de redes sociales con animaciones */}
-          <div className="flex justify-center space-x-8 mb-8">
-            {['instagram', 'facebook', 'tiktok'].map((social) => (
-              <motion.a
-                key={social}
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors relative group"
-                whileHover={{ y: -5 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <span className="sr-only">{social}</span>
-                {/* Contenedor del ícono con gradiente animado */}
-                <motion.div
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 backdrop-blur-lg border border-white/10 group-hover:border-purple-500/50 transition-all"
-                  whileHover={{ scale: 1.1, rotate: 15 }}
+      {/* Footer */}
+      <footer className="py-12 sm:py-16 bg-gray-900 border-t border-white/10">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center space-y-8">
+            <div className="flex justify-center space-x-6 sm:space-x-8">
+              {['instagram', 'facebook', 'tiktok'].map((social) => (
+                <motion.a
+                  key={social}
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors relative group"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
+                  <span className="sr-only">{social}</span>
+                  <motion.div
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 backdrop-blur-lg border border-white/10 group-hover:border-purple-500/50 transition-all"
+                    whileHover={{ scale: 1.1, rotate: 10 }}
                   >
-                    {/* Iconos de redes sociales */}
-                    {social === 'instagram' && (
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    )}
-                    {social === 'facebook' && (
-                      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                    )}
-                    {social === 'tiktok' && (
-                      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
-                    )}
-                  </svg>
-                </motion.div>
-              </motion.a>
-            ))}
-          </div>
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      {social === 'instagram' && (
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                      )}
+                      {social === 'facebook' && (
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                      )}
+                      {social === 'tiktok' && (
+                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+                      )}
+                    </svg>
+                  </motion.div>
+                </motion.a>
+              ))}
+            </div>
 
-          {/* Texto de derechos de autor con gradiente */}
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()}{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Yamid Tarot
-            </span>
-            . Todos los derechos reservados.
-          </p>
+            <p className="text-gray-500 text-sm text-center">
+              © {new Date().getFullYear()}{' '}
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Yamid Tarot
+              </span>
+              . Todos los derechos reservados.
+            </p>
+          </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 
 export default LandingPage;
+
