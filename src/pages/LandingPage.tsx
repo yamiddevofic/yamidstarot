@@ -148,7 +148,6 @@ const LandingPage = () => {
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
       >
         <div className="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-          {/* Logo */}
           <motion.div
             className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent flex items-center gap-2"
             initial={{ opacity: 0, x: -20 }}
@@ -160,7 +159,6 @@ const LandingPage = () => {
               animate={{ rotate: 360 }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             >
-              {/* Star SVG */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
