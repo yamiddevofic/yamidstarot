@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BsWhatsapp } from 'react-icons/bs';
 
 
 const getIconForNavItem = (item: string) => {
