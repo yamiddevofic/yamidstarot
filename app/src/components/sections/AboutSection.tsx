@@ -5,7 +5,7 @@ export const AboutSection = () => (
           <div className="relative group order-2 md:order-1">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition-all duration-300" />
             <img
-              src="./yamidtarot.png"
+              src="./yamidtarot.jpg"
               alt="Yamid Tarot"
               className="relative rounded-3xl transform rotate-3 group-hover:rotate-0 transition-all duration-300 w-full"
             />

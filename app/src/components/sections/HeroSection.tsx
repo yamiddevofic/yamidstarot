@@ -20,7 +20,7 @@ export const HeroSection = () => (
         </motion.h1>
 
         <motion.p
-          className="text-[1.15rem] sm:text-[1.25rem] md:text-[1.35rem] text-purple-100 mb-8 font-light leading-relaxed max-w-2xl mx-auto"
+          className="text-[.7rem] sm:text-[1rem] md:text-[1.2rem] text-purple-100 mb-8 font-light leading-relaxed max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
@@ -43,7 +43,7 @@ export const HeroSection = () => (
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
-              <span className="text-sm sm:text-base">Reserva tu lectura</span>
+              <span className="text-[.7rem] sm:text-[1rem]">Reserva tu lectura</span>
             </motion.button>
           </a>
         </div>
