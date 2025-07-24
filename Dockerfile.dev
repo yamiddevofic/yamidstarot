@@ -1,0 +1,16 @@
+# Dockerfile.dev
+FROM node:18
+
+WORKDIR /app
+
+# Instala dependencias primero
+COPY app/package*.json ./
+RUN npm install
+
+# Copia todo lo demás
+COPY app/ .
+
+# Usa esto para hot reload en React
+ENV CHOKIDAR_USEPOLLING=true
+
+CMD ["npm", "run", "dev"]

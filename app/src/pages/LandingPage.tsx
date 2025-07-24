@@ -279,15 +279,7 @@ const LandingPage = () => {
       {/* Hero Section */}
       <section id="inicio" className="relative min-h-screen flex items-center justify-center pt-20">
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="tarot.mov" type="video/mp4" />
-          </video>
+          <img src="./fondo-animados-estrellas.gif" alt="Yamid Tarot" className="w-full h-full object-cover" /> 
           <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/50 to-gray-900/90" />
         </div>
 
@@ -297,7 +289,7 @@ const LandingPage = () => {
             {...heroAnimation}
           >
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent"
+              className="text-[4rem] sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-500 via-pink-400 to-indigo-500 bg-clip-text text-transparent leading-none md:leading-relaxed"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
@@ -306,7 +298,7 @@ const LandingPage = () => {
             </motion.h1>
 
             <motion.p
-              className="text-base sm:text-lg md:text-xl text-purple-100 mb-8 font-light leading-relaxed max-w-2xl mx-auto"
+              className="text-[1.15rem] sm:text-[1.25rem] md:text-[1.35rem] text-purple-100 mb-8 font-light leading-relaxed max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1 }}
@@ -314,15 +306,15 @@ const LandingPage = () => {
               Transforma tu vida con una lectura de tarot personalizada. Conecta con tu yo interior y desbloquea las respuestas que el universo tiene para ti.
             </motion.p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 max-w-2xl mx-auto">
               <a
                 href="https://wa.me/+573124673850?text=Hola%2C%20estoy%20interesado%20en%20reservar%20una%20lectura%20de%20tarot%20contigo."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full"
+                className="w-full flex items-center justify-center"
               >
                 <motion.button
-                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-600/40 flex items-center justify-center gap-2 transition-all"
+                  className="w-[50%] px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-600/40 flex items-center justify-center gap-2 transition-all"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -341,22 +333,6 @@ const LandingPage = () => {
                     />
                   </svg>
                   Reserva tu lectura
-                </motion.button>
-              </a>
-
-              <a
-                href="/grupo-whatsapp"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full"
-              >
-                <motion.button
-                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-600/40 flex items-center justify-center gap-2 transition-all"
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <BsWhatsapp className="w-5 h-5 animate-bounce" />
-                  Únete al grupo
                 </motion.button>
               </a>
             </div>
