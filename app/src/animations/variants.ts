@@ -1,3 +1,5 @@
+import { Variants } from 'framer-motion';
+
 // src/animations/variants.ts
 export const heroAnimation = {
   initial: { opacity: 0, y: -50 },
@@ -5,12 +7,12 @@ export const heroAnimation = {
   transition: { duration: 1 },
 };
 
-export const overlayVariants = {
+export const overlayVariants: Variants = {
   hidden: { opacity: 0, y: "-5%" },
   visible: { opacity: 1, y: "0%" },
 };
 
-export const menuItemVariants = {
+export const menuItemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
@@ -18,8 +20,8 @@ export const menuItemVariants = {
     transition: { delay: i * 0.1 },
   }),
 };
-// src/animations/variants.ts
-export const floatButtonVariants = {
+
+export const floatButtonVariants: Variants = {
   idle: {
     y: 0,
     scale: 1,
@@ -28,9 +30,9 @@ export const floatButtonVariants = {
     filter: "brightness(1) saturate(1)",
   },
   float: {
-    y: [0, -12, 0, -8, 0, -4, 0],
-    rotate: [0, 1.2, 0, -0.8, 0, 0.4, 0],
-    scale: [1, 1.02, 1, 1.015, 1, 1.008, 1],
+    y: [0, -12, 0, -8, 0, -4, 0] as unknown as number, // Type assertion for Framer Motion
+    rotate: [0, 1.2, 0, -0.8, 0, 0.4, 0] as unknown as number, // Type assertion for Framer Motion
+    scale: [1, 1.02, 1, 1.015, 1, 1.008, 1] as unknown as number, // Type assertion for Framer Motion
     boxShadow: [
       "0 2px 8px rgba(0,0,0,0.12)",
       "0 16px 32px rgba(164,69,255,0.25)",
@@ -39,7 +41,7 @@ export const floatButtonVariants = {
       "0 2px 8px rgba(0,0,0,0.12)",
       "0 8px 16px rgba(164,69,255,0.18)",
       "0 2px 8px rgba(0,0,0,0.12)",
-    ],
+    ] as unknown as string, // Type assertion for Framer Motion
     filter: [
       "brightness(1) saturate(1)",
       "brightness(1.06) saturate(1.04)",
@@ -48,7 +50,7 @@ export const floatButtonVariants = {
       "brightness(1) saturate(1)",
       "brightness(1.02) saturate(1.02)",
       "brightness(1) saturate(1)",
-    ],
+    ] as unknown as string, // Type assertion for Framer Motion
     transition: {
       duration: 6,
       times: [0, 0.2, 0.35, 0.55, 0.7, 0.85, 1],
@@ -82,21 +84,21 @@ export const floatButtonVariants = {
   },
   // Animación de atención más sutil y natural
   attention: {
-    scale: [1, 1.05, 1.02, 1],
-    y: [0, -8, -4, 0],
-    rotate: [0, 2, -1, 0],
+    scale: [1, 1.05, 1.02, 1] as unknown as number, // Type assertion for Framer Motion
+    y: [0, -8, -4, 0] as unknown as number, // Type assertion for Framer Motion
+    rotate: [0, 2, -1, 0] as unknown as number, // Type assertion for Framer Motion
     boxShadow: [
       "0 2px 8px rgba(0,0,0,0.12)",
       "0 16px 32px rgba(244,114,182,0.4)",
       "0 8px 16px rgba(164,69,255,0.3)",
       "0 2px 8px rgba(0,0,0,0.12)",
-    ],
+    ] as unknown as string, // Type assertion for Framer Motion
     filter: [
       "brightness(1) saturate(1)",
       "brightness(1.08) saturate(1.06)",
       "brightness(1.04) saturate(1.03)",
       "brightness(1) saturate(1)",
-    ],
+    ] as unknown as string, // Type assertion for Framer Motion
     transition: {
       duration: 1.2,
       times: [0, 0.4, 0.7, 1],
