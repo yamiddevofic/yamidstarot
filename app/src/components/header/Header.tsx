@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavItem } from '../nav/NavItem';
-import { overlayVariants, menuItemVariants } from '../../animations/variants';
+import { uiElements, interactive } from '../../animations/variants';
 import { useScrollVisibility } from '../../hooks/useScrollVisibility';
 
 const navItems = ["Inicio", "Sobre Mí", "Servicios", "Contacto"]; // mismo orden que tu código
@@ -26,22 +26,6 @@ export const Header = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <motion.div
-            className="w-6 h-6 sm:w-8 sm:h-8"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          >
-            {/* SVG igual al tuyo */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="url(#logo-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-              <defs>
-                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: "#A78BFA", stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: "#F472B6", stopOpacity: 1 }} />
-                </linearGradient>
-              </defs>
-              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-            </svg>
-          </motion.div>
           <span className="inline">Yamid Tarot</span>
         </motion.div>
 
@@ -60,9 +44,9 @@ export const Header = () => {
             aria-expanded={menuOpen}
           >
             <motion.div className="w-6 h-6 relative flex justify-center items-center" animate={menuOpen ? "open" : "closed"}>
-              <motion.span className="absolute h-0.5 w-full bg-white rounded-full" variants={{ closed: { top: "35%", rotate: 0 }, open: { top: "50%", rotate: 45 } }} />
+              <motion.span className="absolute h-0.5 w-full bg-white rounded-full" variants={{ closed: { top: "25%", rotate: 0 }, open: { top: "50%", rotate: 45 } }} />
               <motion.span className="absolute h-0.5 w-full bg-white rounded-full" variants={{ closed: { opacity: 1 }, open: { opacity: 0 } }} style={{ top: "50%" }} />
-              <motion.span className="absolute h-0.5 w-full bg-white rounded-full" variants={{ closed: { top: "65%", rotate: 0 }, open: { top: "50%", rotate: -45 } }} />
+              <motion.span className="absolute h-0.5 w-full bg-white rounded-full" variants={{ closed: { top: "75%", rotate: 0 }, open: { top: "50%", rotate: -45 } }} />
             </motion.div>
           </button>
         </div>
@@ -76,11 +60,11 @@ export const Header = () => {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            variants={overlayVariants}
+            variants={uiElements.overlay}
           >
             <div className="container mx-auto px-4 py-6">
               {navItems.map((item, index) => (
-                <motion.div key={item} custom={index} variants={menuItemVariants}>
+                <motion.div key={item} custom={index} variants={interactive.menuItem}>
                   <a
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
                     className="block py-3 text-lg font-medium text-white hover:text-purple-400 transition-colors"

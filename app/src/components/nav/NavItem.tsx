@@ -12,6 +12,9 @@ export const NavItem = ({ item }: Props) => (
     className="relative text-white/90 hover:text-white transition-colors text-base xl:text-lg font-medium flex items-center gap-2 group"
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.5 }}
   >
     <motion.div
       className="w-4 h-4 xl:w-5 xl:h-5"

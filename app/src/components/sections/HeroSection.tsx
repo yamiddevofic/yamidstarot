@@ -1,14 +1,13 @@
 import { motion } from 'framer-motion';
-import { heroAnimation } from '../../animations/variants';
 import FloatWhatsAppBtn from '../FloatWhatsApp';
 export const HeroSection = () => (
-  <section id="inicio" className="relative min-h-[80vh] md:min-h-[90vh] flex items-center justify-center pt-32 md:pt-25">
+  <section id="inicio" className="relative min-h-[80vh] md:min-h-[90vh] flex items-center justify-center pt-32 md:pt-[6%]">
     <div className="absolute inset-0 z-0">
       <img src="./fondo-animados-estrellas.gif" alt="Yamid Tarot" className="w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/50 to-gray-900/90" />
     </div>
     <div className="relative z-10 container mx-auto px-4 py-12 sm:py-16">
-      <motion.div className="text-center max-w-4xl mx-auto" {...heroAnimation}>
+      <motion.div className="text-center max-w-4xl mx-auto">
         <motion.h1
           className="text-[3rem] sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-500 via-pink-400 to-indigo-500 bg-clip-text text-transparent leading-none md:leading-relaxed"
           initial={{ opacity: 0, y: -50 }}
