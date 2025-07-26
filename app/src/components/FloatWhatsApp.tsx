@@ -1,14 +1,12 @@
-import { easeIn, easeInOut, motion, useAnimation, useReducedMotion } from 'framer-motion';
-import { interactive, uiElements } from '../animations/variants';
+import { motion, useAnimation, useReducedMotion } from 'framer-motion';
+import { uiElements } from '../animations/variants';
 import { useEffect, useState } from 'react';
-import { div } from 'framer-motion/client';
 
 const FloatWhatsAppBtn = () => {
   const controls = useAnimation();
   const iconControls = useAnimation();
   const glowControls = useAnimation();
   const prefersReduced = useReducedMotion();
-  const [isPressed, setIsPressed] = useState(false);
 
   useEffect(() => {
     if (prefersReduced) return;
@@ -50,12 +48,6 @@ const FloatWhatsAppBtn = () => {
     }, 3000);
 
   }, [controls, iconControls, glowControls, prefersReduced]);
-
-  const handleTap = () => {
-    if (prefersReduced) return;
-    setIsPressed(true);
-    setTimeout(() => setIsPressed(false), 200);
-  };
 
   return (
     <div className="relative">
