@@ -1,6 +1,6 @@
 import { motion, useAnimation, useReducedMotion } from 'framer-motion';
 import { uiElements } from '../animations/variants';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const FloatWhatsAppBtn = () => {
   const controls = useAnimation();
